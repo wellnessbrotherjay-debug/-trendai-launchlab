@@ -19,6 +19,7 @@ type Round = {
   investors: number;
   roi: number;
   status: string;
+  countdown_end?: string | null;
 };
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string | undefined;
