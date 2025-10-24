@@ -10,6 +10,10 @@ import { createClient, type PostgrestSingleResponse } from "@supabase/supabase-j
 import ReserveModal from "../components/ReserveModal";
 import TrendCarousel from "../components/TrendCarousel";
 import ProjectionChart from "../components/ProjectionChart";
+import AIAnalystChat from "../components/AIAnalystChat";
+import AlertsInbox from "../components/AlertsInbox";
+import RecommendedRounds from "../components/RecommendedRounds";
+import TransparencySnapshot from "../components/TransparencySnapshot";
 
 type Round = {
   id: string;
@@ -201,8 +205,10 @@ export default function Page() {
             <span className="text-lg font-semibold tracking-wide">TrendAI LaunchLab</span>
           </div>
           <nav className="flex items-center gap-4 text-sm">
+            <AlertsInbox />
             <span className="text-white/70 hover:text-white transition">How it works</span>
-            <span className="text-white/70 hover:text-white transition">Rounds</span>
+            <a href="/marketplace" className="text-white/70 hover:text-white transition">Marketplace</a>
+            <a href="/live" className="text-white/70 hover:text-white transition">Live</a>
             <span className="text-white/70 hover:text-white transition">Security</span>
           </nav>
         </div>
@@ -388,6 +394,14 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Transparency + Recommendations */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-14 grid gap-4 md:grid-cols-2">
+          <TransparencySnapshot />
+          <RecommendedRounds />
+        </div>
+      </section>
+
       {/* Spotter‑X Visualization (#12) */}
       <section className="relative z-10">
         <div className="mx-auto max-w-7xl px-6 pb-14">
@@ -509,6 +523,7 @@ export default function Page() {
           <div className="text-xs text-white/40">Security | Terms | Privacy</div>
         </div>
       </footer>
+      <AIAnalystChat />
     </main>
   );
 }
