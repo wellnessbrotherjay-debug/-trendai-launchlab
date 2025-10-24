@@ -7,6 +7,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient, type PostgrestSingleResponse } from "@supabase/supabase-js";
+import ReserveModal from "../components/ReserveModal";
+import TrendCarousel from "../components/TrendCarousel";
+import ProjectionChart from "../components/ProjectionChart";
 
 type Round = {
   id: string;
@@ -39,6 +42,8 @@ export default function Page() {
   }, []);
 
   const [round, setRound] = useState<Round | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [now, setNow] = useState<number>(Date.now());
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const subMounted = useRef(false);
@@ -76,7 +81,17 @@ export default function Page() {
         }
       } catch (e: any) {
         if (active) {
+          // Graceful fallback when table doesn't exist (404) or other setup issues
           setError(e?.message || "Failed to load round");
+          setRound({
+            id: "mock",
+            name: "Ramen Cat Tee",
+            soft_cap: 10000,
+            raised: Math.round((pct / 100) * 10000),
+            investors: 21,
+            roi: 2.3,
+            status: "Active",
+          });
           setLoading(false);
         }
       }
@@ -108,6 +123,12 @@ export default function Page() {
     };
   }, []);
 
+  // Countdown ticker
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
+
   const softCap = round?.soft_cap ?? 250_000;
   const raised = round?.raised ?? Math.round((pct / 100) * softCap);
   const investors = round?.investors ?? 0;
@@ -120,6 +141,17 @@ export default function Page() {
     const val = Math.max(0, Math.min(100, (raised / softCap) * 100));
     return val;
   }, [raised, softCap]);
+
+  const endsAt = round?.countdown_end ? new Date(round.countdown_end).getTime() : null;
+  const remainingMs = endsAt ? Math.max(0, endsAt - now) : null;
+  const expired = remainingMs !== null && remainingMs <= 0;
+  const fmt = (ms: number) => {
+    const s = Math.floor(ms / 1000);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+  };
 
   const roiRows = useMemo(
     () => [
@@ -141,6 +173,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-dark text-white overflow-hidden">
+      <ReserveModal round={round} open={modalOpen} onClose={() => setModalOpen(false)} />
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 opacity-20 bg-hero-radials" aria-hidden />
@@ -207,6 +240,11 @@ export default function Page() {
                       </p>
                     )}
                     <p className="mt-2 text-xs text-white/50">Data auto‑refreshes in real‑time via Supabase 🔄</p>
+                    {endsAt && (
+                      <p className="mt-2 text-xs text-white/70">
+                        Time remaining: {expired ? "00:00:00" : fmt(remainingMs!)}
+                      </p>
+                    )}
                   </div>
                   <div className="text-right">
                     <p className="text-sm text-white/60">Round Status</p>
@@ -234,9 +272,13 @@ export default function Page() {
                 </div>
                 <div className="mt-2 text-right text-xs text-white/60">{loading ? "--" : `${progressPct.toFixed(0)}%`}</div>
 
-                <button className="mt-5 w-full md:w-auto group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-5 py-3 font-medium tracking-wide text-dark transition-transform duration-300 hover:scale-[1.02] focus:scale-[1.01] focus:outline-none">
+                <button
+                  onClick={() => setModalOpen(true)}
+                  disabled={expired}
+                  className="mt-5 w-full md:w-auto group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-5 py-3 font-medium tracking-wide text-dark transition-transform duration-300 hover:scale-[1.02] focus:scale-[1.01] focus:outline-none disabled:opacity-50"
+                >
                   <span className="absolute -inset-0 rounded-xl opacity-40 blur-md transition group-hover:opacity-70 bg-gradient-to-r from-neon-purple to-neon-teal" />
-                  <span className="relative">Join the Round</span>
+                  <span className="relative">{expired ? "Round Ended" : "Join the Round"}</span>
                   <svg className="relative h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none">
                     <path d="M5 12h14M13 5l7 7-7 7" stroke="#0f1220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -277,6 +319,114 @@ export default function Page() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Next Trend Preview (#9) */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-14">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg md:text-xl font-semibold">Next Trend Preview</h2>
+            <span className="text-xs text-white/60">Top 3 by AI Confidence</span>
+          </div>
+          <TrendCarousel />
+        </div>
+      </section>
+
+      {/* 30‑Day ROI Timeline (#10) */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-14">
+          <h2 className="text-lg md:text-xl font-semibold">30‑Day ROI Timeline</h2>
+          <ol className="mt-6 grid gap-4 md:grid-cols-5">
+            {[
+              "AI spots trend",
+              "Product drafted",
+              "Round opens",
+              "Marketing launch",
+              "Profit shared",
+            ].map((t, i) => (
+              <li key={t} className="relative rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/80">
+                <span className="mb-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-xs">{i + 1}</span>
+                <div>{t}</div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* 360° Execution System (#16) */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-14">
+          <h2 className="text-2xl font-semibold">From Viral Idea to Global Sales — All Under One Roof</h2>
+          <p className="mt-2 text-white/60 max-w-2xl">Six pillars that turn trends into brands.</p>
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              ["AI Trend Discovery", "Spotter‑X mines 20M+ signals daily."],
+              ["Product Design & Branding", "Identity, packaging, landing pages."],
+              ["Supplier Integration", "MOQ, QA, logistics, compliance."],
+              ["Marketing Engine", "Creators, paid, UGC, affiliates."],
+              ["Sales & Analytics", "Funnels, CAC/LTV, dashboards."],
+              ["Investor Profit Sharing", "Transparent settlements in 30 days."],
+            ].map(([title, desc]) => (
+              <div key={title} className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
+                <h3 className="font-semibold">{title}</h3>
+                <p className="mt-2 text-sm text-white/70">{desc}</p>
+              </div>
+            ))}
+          </div>
+          <button className="mt-6 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm hover:bg-white/10">See How a Trend Becomes a Brand</button>
+        </div>
+      </section>
+
+      {/* Projection Engine Chart (#11) */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-14">
+          <h2 className="text-lg md:text-xl font-semibold">Projection Engine</h2>
+          <ProjectionChart />
+        </div>
+      </section>
+
+      {/* Spotter‑X Visualization (#12) */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-14">
+          <h2 className="text-lg md:text-xl font-semibold">Inside Spotter‑X</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">Sources</div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">Neural Core</div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">LaunchLab Output</div>
+          </div>
+          <p className="mt-2 text-xs text-white/60">Spotter‑X analyzes 20M+ data points daily; top 1% reach LaunchLab.</p>
+        </div>
+      </section>
+
+      {/* Trust & Transparency (#14) */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-14">
+          <h2 className="text-lg md:text-xl font-semibold">Trust & Transparency 2.0</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {[
+              ["Stripe Pre‑Auth Vault", "Payments flip on only when enabled."],
+              ["Live Supabase Tracking", "Every update visible in real‑time."],
+              ["Refund Guarantee", "Rounds that miss soft‑cap won’t charge."],
+            ].map(([t, d]) => (
+              <div key={t as string} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <h3 className="font-semibold">{t}</h3>
+                <p className="mt-2 text-sm text-white/70">{d}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">Test Mode · Demo funds only</div>
+        </div>
+      </section>
+
+      {/* CTA (#15) */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-20">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center">
+            <h2 className="text-2xl font-semibold">Ready to reserve your seat in the next viral trend?</h2>
+            <p className="mt-2 text-white/70">Join the next 24 h AI‑powered round and be part of the future.</p>
+            <button onClick={() => setModalOpen(true)} className="mx-auto mt-5 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-5 py-3 font-medium text-dark">Reserve Your Spot</button>
           </div>
         </div>
       </section>
