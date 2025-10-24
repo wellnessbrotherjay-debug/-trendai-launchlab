@@ -44,8 +44,9 @@ const config: Config = {
     },
   },
   plugins: [
-    function ({ addUtilities }) {
-      addUtilities({
+    // Typed plugin helper to avoid TS implicit any in config build
+    function (api: { addUtilities: (utils: Record<string, any>) => void }) {
+      api.addUtilities({
         '.glass': {
           '@apply border border-white/10 bg-white/5 backdrop-blur-xl': {},
         },
@@ -55,4 +56,3 @@ const config: Config = {
 };
 
 export default config;
-
