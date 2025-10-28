@@ -16,6 +16,7 @@ type Trend = {
   projected_roi: number;
   description?: string;
   image_url?: string;
+  amazon_url?: string | null;
 };
 
 const fallback: Trend[] = [
@@ -26,6 +27,7 @@ const fallback: Trend[] = [
     projected_roi: 3.2,
     description: "Eco decor trend",
     image_url: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=60",
+    amazon_url: "https://www.amazon.com/s?k=scented+candles+eco",
   },
   {
     id: "zen",
@@ -34,6 +36,7 @@ const fallback: Trend[] = [
     projected_roi: 3.1,
     description: "Pet hoodie boom",
     image_url: "https://images.unsplash.com/photo-1542219550-3992a0e3ed5b?auto=format&fit=crop&w=1200&q=60",
+    amazon_url: "https://www.amazon.com/s?k=cat+hoodie",
   },
   {
     id: "bottle",
@@ -42,6 +45,7 @@ const fallback: Trend[] = [
     projected_roi: 2.9,
     description: "Smart bottle craze",
     image_url: "https://images.unsplash.com/photo-1526406915890-7a3f39ab3c49?auto=format&fit=crop&w=1200&q=60",
+    amazon_url: "https://www.amazon.com/s?k=smart+water+bottle",
   },
 ];
 
@@ -53,7 +57,7 @@ export default function TrendCarousel() {
     const load = async () => {
       const { data } = await sb
         .from("trends")
-        .select("id,name,ai_confidence,projected_roi,description,image_url")
+        .select("id,name,ai_confidence,projected_roi,description,image_url,amazon_url")
         .order("ai_confidence", { ascending: false })
         .limit(3);
       if (data && data.length) setTrends(data as any);
@@ -85,7 +89,20 @@ export default function TrendCarousel() {
               <span>AI Confidence {Math.round(t.ai_confidence)}%</span>
               <span>Est. net margin 10–20%</span>
             </div>
-            <div className="mt-4 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-center text-sm transition group-hover:bg-white/10">View Full Trend Report</div>
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-center text-sm transition group-hover:bg-white/10">View Full Trend Report</div>
+              {t.amazon_url ? (
+                <a
+                  href={t.amazon_url}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-center text-sm hover:bg-white/10"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  View on Amazon
+                </a>
+              ) : null}
+            </div>
           </div>
         </Link>
       ))}
