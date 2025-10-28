@@ -156,6 +156,18 @@ export default function Page() {
   const endsAt = round?.countdown_end ? new Date(round.countdown_end).getTime() : null;
   const remainingMs = endsAt ? Math.max(0, endsAt - now) : null;
   const expired = remainingMs !== null && remainingMs <= 0;
+  // Next round timing: 24h round every 3 days (open 24h, ~48h gap)
+  const cycleDays = 3; // every 3 days
+  const openHours = 24; // 24-hour pitch window
+  const nextStartMs = (() => {
+    if (endsAt) {
+      const gapHours = cycleDays * 24 - openHours; // 48h gap for 3-day cadence
+      return endsAt + gapHours * 60 * 60 * 1000;
+    }
+    // Fallback: assume next begins in full cycle length from now
+    return now + cycleDays * 24 * 60 * 60 * 1000;
+  })();
+  const untilNextMs = Math.max(0, nextStartMs - now);
   const fmt = (ms: number) => {
     const s = Math.floor(ms / 1000);
     const h = Math.floor(s / 3600);
@@ -340,14 +352,14 @@ export default function Page() {
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
               <div className="text-sm text-white/60">24‑Hour Round</div>
               <div className="mt-1 text-xl font-semibold">
-                {expired ? "Round closed" : endsAt ? `Ends in ${fmt(remainingMs!)}` : "Live timing coming soon"}
+                {endsAt ? (expired ? `Next opens in ${fmt(untilNextMs)}` : `Ends in ${fmt(remainingMs!)}`) : "Live timing coming soon"}
               </div>
-              <div className="mt-2 text-xs text-white/60">Soft‑cap rounds open for 24 hours. No charge until soft‑cap is met.</div>
+              <div className="mt-2 text-xs text-white/60">Rounds run for 24 hours and recur every 3 days.</div>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
               <div className="text-sm text-white/60">Next Trend</div>
               <div className="mt-1 text-lg">Auto‑selected by Spotter‑X</div>
-              <div className="text-xs text-white/60">Preview top signal now; full brief unlocks at open.</div>
+              <div className="text-xs text-white/60">Next buy‑in round {endsAt ? (expired ? `opens in ${fmt(untilNextMs)}` : `in ${fmt(remainingMs!)}`) : "schedule pending"}.</div>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-between gap-3">
               <div>
