@@ -249,7 +249,7 @@ export default function Page() {
 
       
 
-              <div className="mt-8 rounded-2xl glass p-5">
+              <div className="mt-8 rounded-2xl glass p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
                 <div className="flex items-end justify-between">
                   <div>
                     <p className="text-sm text-white/60">Soft‑Cap Progress</p>
@@ -341,7 +341,7 @@ export default function Page() {
           </div>
           {/* 24-hour round countdown + reserve CTA */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
               <div className="text-sm text-white/60">24‑Hour Round</div>
               <div className="mt-1 text-xl font-semibold" suppressHydrationWarning>
                 {mounted ? (endsAt ? (expired ? `Next opens in ${fmt(untilNextMs)}` : `Ends in ${fmt(remainingMs!)}`) : "Live timing coming soon") : "--:--:--"}
@@ -355,14 +355,14 @@ export default function Page() {
                 Next buy‑in round {mounted ? (endsAt ? (expired ? `opens in ${fmt(untilNextMs)}` : `in ${fmt(remainingMs!)}`) : "schedule pending") : "--:--:--"}.
               </div>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-between gap-3">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-between gap-3 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
               <div>
                 <div className="text-sm text-white/60">Reserve a Spot</div>
                 <div className="text-xs text-white/60">Hold your place with a $200 pre‑order.</div>
               </div>
               <button
                 onClick={() => setModalOpen(true)}
-                className="w-full md:w-auto rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-4 py-2 text-dark font-medium"
+                className="w-full md:w-auto rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-5 py-3 text-dark font-medium"
               >Reserve</button>
             </div>
           </div>
@@ -575,14 +575,16 @@ export default function Page() {
       </section>
 
       {/* Sticky mobile Reserve CTA */}
-      <div className="md:hidden fixed bottom-4 inset-x-4 z-40">
-        <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-3 flex items-center justify-between gap-3">
+      {!modalOpen && (
+      <div className="md:hidden fixed inset-x-4 z-40" style={{ bottom: 'calc(env(safe-area-inset-bottom) + 16px)' }}>
+        <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-3 flex items-center justify-between gap-3 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
           <div className="text-xs text-white/80" suppressHydrationWarning>
             {mounted ? (endsAt ? (expired ? `Next opens in ${fmt(untilNextMs)}` : `Ends in ${fmt(remainingMs!)}`) : "Live timing coming soon") : "--:--:--"}
           </div>
-          <button onClick={() => setModalOpen(true)} className="rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-4 py-2 text-dark text-sm font-medium">Reserve</button>
+          <button onClick={() => setModalOpen(true)} className="rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-5 py-2.5 text-dark text-sm font-medium">Reserve</button>
         </div>
       </div>
+      )}
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-white/10">
