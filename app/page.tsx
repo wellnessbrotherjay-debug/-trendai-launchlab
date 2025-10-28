@@ -516,7 +516,7 @@ export default function Page() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-xs text-white/60">Footnote: "Simulated for demo; typical net margins for Amazon sellers are ~10–20%."</p>
+            <p className="mt-3 text-xs text-white/60">Footnote: &quot;Simulated for demo; typical net margins for Amazon sellers are ~10–20%.&quot;</p>
           </div>
         </div>
       </section>
