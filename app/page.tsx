@@ -1,8 +1,8 @@
 "use client";
 /**
  * Env setup (.env.local):
- * NEXT_PUBLIC_SUPABASE_URL=https://yourproject.supabase.co
- * NEXT_PUBLIC_SUPABASE_ANON_KEY=your_public_anon_key
+ * NEXT_PUBLIC_SUPABASE_URL=https://jkfvecdtwzhzpypctklg.supabase.co
+ * NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprZnZlY2R0d3poenB5cGN0a2xnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMDExNzQsImV4cCI6MjA3Njg3NzE3NH0.FibX5COOQFf38Sct8cM1ssnH10EgmypPUFPNtqWwKyg
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -331,9 +331,7 @@ export default function Page() {
                     </div>
                   </div>
                 </div>
-                <p className="mt-3 text-sm text-white/60">
-                  Replace with a <code className="text-white/80">video</code> or <code className="text-white/80">&lt;lottie-player&gt;</code> embed for production.
-                </p>
+                
               </div>
             </div>
           </div>
