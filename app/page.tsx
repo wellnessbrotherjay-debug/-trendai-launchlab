@@ -335,6 +335,31 @@ export default function Page() {
               </div>
             </div>
           </div>
+          {/* 24-hour round countdown + reserve CTA */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div className="text-sm text-white/60">24‑Hour Round</div>
+              <div className="mt-1 text-xl font-semibold">
+                {expired ? "Round closed" : endsAt ? `Ends in ${fmt(remainingMs!)}` : "Live timing coming soon"}
+              </div>
+              <div className="mt-2 text-xs text-white/60">Soft‑cap rounds open for 24 hours. No charge until soft‑cap is met.</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div className="text-sm text-white/60">Next Trend</div>
+              <div className="mt-1 text-lg">Auto‑selected by Spotter‑X</div>
+              <div className="text-xs text-white/60">Preview top signal now; full brief unlocks at open.</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-between gap-3">
+              <div>
+                <div className="text-sm text-white/60">Reserve a Spot</div>
+                <div className="text-xs text-white/60">Hold your place with a $200 pre‑order.</div>
+              </div>
+              <button
+                onClick={() => setModalOpen(true)}
+                className="rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-4 py-2 text-dark font-medium"
+              >Reserve</button>
+            </div>
+          </div>
         </div>
       </section>
 
