@@ -243,23 +243,7 @@ export default function Page() {
                 Current Round: <span className="text-white/90 font-medium">{roundName}</span>
       </div>
 
-      {/* Where Your Money Goes */}
-      <section id="money" className="relative z-10 mt-12">
-        <div className="mx-auto max-w-7xl px-6">
-          <h2 className="text-xl font-semibold">Where Your Money Goes</h2>
-          <p className="text-white/70">Unit economics, returns, timeline, and process transparency.</p>
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
-            <div className="h-full"><UnitEconomicsChart /></div>
-            <div className="h-full"><ReturnCalculator /></div>
-            <div className="h-full"><RiskGauge /></div>
-            <div className="h-full"><FundingTimeline /></div>
-            <div className="h-full"><ProcessFlow /></div>
-          </div>
-        </div>
-      </section>
-
-      {/* Fadi section at the bottom */}
-      <FadiSection />
+      
 
               <div className="mt-8 rounded-2xl glass p-5">
                 <div className="flex items-end justify-between">
@@ -356,6 +340,21 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Where Your Money Goes (placed under CTA) */}
+      <section id="money" className="relative z-10">
+        <div className="mx-auto max-w-7xl px-6 pb-10">
+          <h2 className="text-xl font-semibold">Where Your Money Goes</h2>
+          <p className="text-white/70">Unit economics, returns, timeline, and process transparency.</p>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
+            <div className="h-full"><UnitEconomicsChart /></div>
+            <div className="h-full"><ReturnCalculator /></div>
+            <div className="h-full"><RiskGauge /></div>
+            <div className="h-full"><FundingTimeline /></div>
+            <div className="h-full"><ProcessFlow /></div>
+          </div>
+        </div>
+      </section>
+
       {/* Next Trend Preview (#9) */}
       <section className="relative z-10">
         <div className="mx-auto max-w-7xl px-6 pb-14">
@@ -419,6 +418,9 @@ export default function Page() {
           <ProjectionChart />
         </div>
       </section>
+
+      {/* Fadi section at the very bottom */}
+      <FadiSection />
 
       {/* Transparency + Recommendations */}
       <section className="relative z-10">
