@@ -243,9 +243,6 @@ export default function Page() {
                 Current Round: <span className="text-white/90 font-medium">{roundName}</span>
       </div>
 
-      {/* Fadi section */}
-      <FadiSection />
-
       {/* Where Your Money Goes */}
       <section id="money" className="relative z-10 mt-12">
         <div className="mx-auto max-w-7xl px-6">
@@ -260,6 +257,9 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* Fadi section at the bottom */}
+      <FadiSection />
 
               <div className="mt-8 rounded-2xl glass p-5">
                 <div className="flex items-end justify-between">
