@@ -37,20 +37,8 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string | undefi
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 export default function Page() {
-  // Simulated percent for text only (bar uses CSS animation)
-  const [pct, setPct] = useState(42);
-  useEffect(() => {
-    let dir = 1;
-    const id = setInterval(() => {
-      setPct((p) => {
-        const next = p + dir * (Math.random() * 2 + 0.5);
-        if (next >= 92) { dir = -1; return 92; }
-        if (next <= 18) { dir = 1; return 18; }
-        return next;
-      });
-    }, 160);
-    return () => clearInterval(id);
-  }, []);
+  // Progress is now static unless updated by realtime DB events.
+  const [pct] = useState(42);
 
   const [round, setRound] = useState<Round | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
