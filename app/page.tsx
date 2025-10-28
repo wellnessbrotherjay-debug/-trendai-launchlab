@@ -248,12 +248,12 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-6">
           <h2 className="text-xl font-semibold">Where Your Money Goes</h2>
           <p className="text-white/70">Unit economics, returns, timeline, and process transparency.</p>
-          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <UnitEconomicsChart />
-            <ReturnCalculator />
-            <FundingTimeline />
-            <ProcessFlow />
-            <RiskGauge />
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
+            <div className="h-full"><UnitEconomicsChart /></div>
+            <div className="h-full"><ReturnCalculator /></div>
+            <div className="h-full"><RiskGauge /></div>
+            <div className="h-full"><FundingTimeline /></div>
+            <div className="h-full"><ProcessFlow /></div>
           </div>
         </div>
       </section>
