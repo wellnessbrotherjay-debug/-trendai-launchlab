@@ -29,12 +29,27 @@ export default function InsightsPage() {
       <div className="mx-auto max-w-7xl px-6 py-8">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold">Campaign Insights</h1>
-          <button
-            onClick={handleBack}
+          <a
+            href="/"
+            onClick={(e) => {
+              try {
+                if (typeof window !== "undefined") {
+                  const canGoBack = window.history.length > 1;
+                  const ref = document.referrer;
+                  const same = ref && new URL(ref).origin === window.location.origin;
+                  if (canGoBack && same) {
+                    e.preventDefault();
+                    window.history.back();
+                    return;
+                  }
+                }
+              } catch {}
+              // fall through to href
+            }}
             className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-sm hover:bg-white/10"
           >
             ← Back
-          </button>
+          </a>
         </div>
         <p className="text-white/70">Ad spend bars, CPC/CPA, production timeline, and money breakdown.</p>
 
