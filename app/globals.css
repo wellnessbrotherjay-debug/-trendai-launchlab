@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html { scroll-behavior: smooth; }
+
+/* Ensure in-page anchors aren't hidden under header */
+section#money { scroll-margin-top: 96px; }
+
 /* Typography tweaks */
 @layer base {
   html { @apply antialiased; }
