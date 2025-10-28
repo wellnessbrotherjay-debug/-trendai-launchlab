@@ -236,11 +236,11 @@ export default function Page() {
                 <span className="h-2 w-2 rounded-full bg-neon-teal animate-pulse" />
                 <span className="text-xs text-white/70">AI‑Powered Funding Rounds</span>
               </div>
-              <h1 className="mt-5 text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
+              <h1 className="mt-5 text-3xl sm:text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
                 Back New Products,{" "}
                 <span className="bg-gradient-to-r from-neon-purple to-neon-teal bg-clip-text text-transparent">24‑Hour Rounds</span>
               </h1>
-              <p className="mt-4 text-white/70 max-w-xl">Reward‑based pre‑orders. No charge until the soft‑cap is met.</p>
+              <p className="mt-3 text-sm sm:text-base text-white/70 max-w-xl">Reward‑based pre‑orders. No charge until the soft‑cap is met.</p>
 
               {/* Round name */}
               <div className="mt-4 text-sm text-white/60">
@@ -372,9 +372,9 @@ export default function Page() {
       {/* Where Your Money Goes (placed under CTA) */}
       <section id="money" className="relative z-10">
         <div className="mx-auto max-w-7xl px-6 pb-10">
-          <h2 className="text-xl font-semibold">Where Your Money Goes</h2>
+          <h2 className="text-lg sm:text-xl font-semibold">Where Your Money Goes</h2>
           <p className="text-white/70">Unit economics, returns, timeline, and process transparency.</p>
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6 items-stretch">
             <div className="h-full lg:col-span-4 sm:col-span-2 col-span-1"><UnitEconomicsChart /></div>
             <div className="h-full lg:col-span-5 sm:col-span-2 col-span-1"><ReturnCalculator /></div>
             <div className="h-full lg:col-span-3 sm:col-span-2 col-span-1"><RiskGauge /></div>
@@ -573,6 +573,16 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* Sticky mobile Reserve CTA */}
+      <div className="md:hidden fixed bottom-4 inset-x-4 z-40">
+        <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-3 flex items-center justify-between gap-3">
+          <div className="text-xs text-white/80" suppressHydrationWarning>
+            {mounted ? (endsAt ? (expired ? `Next opens in ${fmt(untilNextMs)}` : `Ends in ${fmt(remainingMs!)}`) : "Live timing coming soon") : "--:--:--"}
+          </div>
+          <button onClick={() => setModalOpen(true)} className="rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-4 py-2 text-dark text-sm font-medium">Reserve</button>
+        </div>
+      </div>
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-white/10">
