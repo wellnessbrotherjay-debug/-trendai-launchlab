@@ -27,6 +27,7 @@ export default function ReserveModal({ round, open, onClose }: { round: any; ope
         .json()
         .catch(() => ({ message: "Unexpected response" }));
       if (!res.ok) throw new Error(data?.message || "Reserve failed");
+      try { window.open("/transparency", "_blank"); } catch {}
       onClose();
     } catch (e: any) {
       setError(e?.message || "Error reserving");

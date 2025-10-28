@@ -14,6 +14,11 @@ import AIAnalystChat from "../components/AIAnalystChat";
 import AlertsInbox from "../components/AlertsInbox";
 import RecommendedRounds from "../components/RecommendedRounds";
 import TransparencySnapshot from "../components/TransparencySnapshot";
+import UnitEconomicsChart from "../components/UnitEconomicsChart";
+import FundingTimeline from "../components/FundingTimeline";
+import ProcessFlow from "../components/ProcessFlow";
+import ReturnCalculator from "../components/ReturnCalculator";
+import RiskGauge from "../components/RiskGauge";
 
 type Round = {
   id: string;
@@ -209,6 +214,7 @@ export default function Page() {
             <span className="text-white/70 hover:text-white transition">How it works</span>
             <a href="/marketplace" className="text-white/70 hover:text-white transition">Marketplace</a>
             <a href="/live" className="text-white/70 hover:text-white transition">Live</a>
+            <a href="/transparency" className="text-white/70 hover:text-white transition">Transparency</a>
             <span className="text-white/70 hover:text-white transition">Security</span>
           </nav>
         </div>
@@ -233,7 +239,22 @@ export default function Page() {
               {/* Round name */}
               <div className="mt-4 text-sm text-white/60">
                 Current Round: <span className="text-white/90 font-medium">{roundName}</span>
-              </div>
+      </div>
+
+      {/* Where Your Money Goes */}
+      <section className="relative z-10 mt-12">
+        <div className="mx-auto max-w-7xl px-6">
+          <h2 className="text-xl font-semibold">Where Your Money Goes</h2>
+          <p className="text-white/70">Unit economics, returns, timeline, and process transparency.</p>
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <UnitEconomicsChart />
+            <ReturnCalculator />
+            <FundingTimeline />
+            <ProcessFlow />
+            <RiskGauge />
+          </div>
+        </div>
+      </section>
 
               <div className="mt-8 rounded-2xl glass p-5">
                 <div className="flex items-end justify-between">
