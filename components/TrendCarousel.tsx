@@ -19,9 +19,30 @@ type Trend = {
 };
 
 const fallback: Trend[] = [
-  { id: "eco", name: "EcoGlow Candle", ai_confidence: 92, projected_roi: 3.2, description: "Eco decor trend", image_url: "/assets/ecoglow.jpg" },
-  { id: "zen", name: "ZenCat Hoodie", ai_confidence: 90, projected_roi: 3.1, description: "Pet hoodie boom", image_url: "/assets/zencat.jpg" },
-  { id: "bottle", name: "SmartGrip Bottle", ai_confidence: 87, projected_roi: 2.9, description: "Smart bottle craze", image_url: "/assets/smartgrip.jpg" },
+  {
+    id: "eco",
+    name: "EcoGlow Candle",
+    ai_confidence: 92,
+    projected_roi: 3.2,
+    description: "Eco decor trend",
+    image_url: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=60",
+  },
+  {
+    id: "zen",
+    name: "ZenCat Hoodie",
+    ai_confidence: 90,
+    projected_roi: 3.1,
+    description: "Pet hoodie boom",
+    image_url: "https://images.unsplash.com/photo-1542219550-3992a0e3ed5b?auto=format&fit=crop&w=1200&q=60",
+  },
+  {
+    id: "bottle",
+    name: "SmartGrip Bottle",
+    ai_confidence: 87,
+    projected_roi: 2.9,
+    description: "Smart bottle craze",
+    image_url: "https://images.unsplash.com/photo-1526406915890-7a3f39ab3c49?auto=format&fit=crop&w=1200&q=60",
+  },
 ];
 
 export default function TrendCarousel() {
