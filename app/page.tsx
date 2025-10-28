@@ -229,7 +229,7 @@ export default function Page() {
       {/* Hero */}
       <section className="relative z-10">
         <div className="mx-auto max-w-7xl px-6 pt-10 pb-14 md:pt-16 md:pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
             {/* Left: copy + progress */}
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur-xl">
@@ -318,8 +318,8 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Right: cinematic visual (placeholder) */}
-            <div className="relative">
+            {/* Right: cinematic visual (placeholder) — hidden on small screens for better mobile UX */}
+            <div className="relative hidden md:block">
               <div className="absolute -inset-6 rounded-3xl from-neon-purple/25 to-neon-teal/25 bg-gradient-to-br blur-2xl" />
               <div className="relative rounded-3xl glass p-6 backdrop-blur-2xl">
                 <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-panel-grad">
@@ -340,7 +340,7 @@ export default function Page() {
             </div>
           </div>
           {/* 24-hour round countdown + reserve CTA */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
               <div className="text-sm text-white/60">24‑Hour Round</div>
               <div className="mt-1 text-xl font-semibold" suppressHydrationWarning>
@@ -362,7 +362,7 @@ export default function Page() {
               </div>
               <button
                 onClick={() => setModalOpen(true)}
-                className="rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-4 py-2 text-dark font-medium"
+                className="w-full md:w-auto rounded-xl bg-gradient-to-r from-neon-purple to-neon-teal px-4 py-2 text-dark font-medium"
               >Reserve</button>
             </div>
           </div>
