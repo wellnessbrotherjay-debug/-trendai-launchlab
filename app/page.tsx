@@ -177,7 +177,7 @@ export default function Page() {
   const steps = [
     { title: "Detect", desc: "Spotter‑X AI identifies breakout product trends across social graphs." },
     { title: "Build", desc: "We validate suppliers, margins, and launch readiness with partners." },
-    { title: "Invest", desc: "Join a 24‑hour soft‑cap round with $200–$1000 tickets." },
+    { title: "Back", desc: "Join a 24‑hour soft‑cap round with $200–$1000 pre‑orders." },
     { title: "Launch", desc: "Products deploy with creative, landing pages, and distribution channels." },
     { title: "Distribute", desc: "Scale via content, affiliates, and retail pilots where applicable." },
   ];
@@ -233,10 +233,10 @@ export default function Page() {
                 <span className="text-xs text-white/70">AI‑Powered Funding Rounds</span>
               </div>
               <h1 className="mt-5 text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
-                Invest in the Future,{" "}
-                <span className="bg-gradient-to-r from-neon-purple to-neon-teal bg-clip-text text-transparent">14 Days at a Time</span>
+                Back New Products,{" "}
+                <span className="bg-gradient-to-r from-neon-purple to-neon-teal bg-clip-text text-transparent">24‑Hour Rounds</span>
               </h1>
-              <p className="mt-4 text-white/70 max-w-xl">Join 24‑hour AI‑powered funding rounds. No charge until soft‑cap is met.</p>
+              <p className="mt-4 text-white/70 max-w-xl">Reward‑based pre‑orders. No charge until the soft‑cap is met.</p>
 
               {/* Round name */}
               <div className="mt-4 text-sm text-white/60">
@@ -305,9 +305,9 @@ export default function Page() {
                     <div className="h-4 w-40 animate-pulse rounded bg-white/10" />
                   ) : (
                     <>
-                      <span>{investors} investors</span>
+                      <span>{investors} backers</span>
                       <span className="mx-2">·</span>
-                      <span>ROI forecast: {roiPct.toFixed(1)}%</span>
+                      <span>Est. net margin: 10–20% (non‑guaranteed)</span>
                     </>
                   )}
                 </div>
@@ -366,10 +366,10 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 30‑Day ROI Timeline (#10) */}
+      {/* Launch Timeline (#10) */}
       <section className="relative z-10">
         <div className="mx-auto max-w-7xl px-6 pb-14">
-          <h2 className="text-lg md:text-xl font-semibold">30‑Day ROI Timeline</h2>
+          <h2 className="text-lg md:text-xl font-semibold">Launch Timeline</h2>
           <ol className="mt-6 grid gap-4 md:grid-cols-5">
             {[
               "AI spots trend",
@@ -399,7 +399,7 @@ export default function Page() {
               ["Supplier Integration", "MOQ, QA, logistics, compliance."],
               ["Marketing Engine", "Creators, paid, UGC, affiliates."],
               ["Sales & Analytics", "Funnels, CAC/LTV, dashboards."],
-              ["Investor Profit Sharing", "Transparent settlements in 30 days."],
+              ["Backer Rewards", "Transparent settlements in 30 days."],
             ].map(([title, desc]) => (
               <div key={title} className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
                 <h3 className="font-semibold">{title}</h3>
@@ -489,7 +489,7 @@ export default function Page() {
                     <th className="px-3 py-2 font-medium">Trend</th>
                     <th className="px-3 py-2 font-medium">AI Confidence</th>
                     <th className="px-3 py-2 font-medium">Soft Cap</th>
-                    <th className="px-3 py-2 font-medium">Est. ROI</th>
+                    <th className="px-3 py-2 font-medium">Est. Net Margin (10–20%)</th>
                     <th className="px-3 py-2 font-medium">Horizon</th>
                   </tr>
                 </thead>
@@ -516,6 +516,7 @@ export default function Page() {
                 </tbody>
               </table>
             </div>
+            <p className="mt-3 text-xs text-white/60">Footnote: "Simulated for demo; typical net margins for Amazon sellers are ~10–20%."</p>
           </div>
         </div>
       </section>
