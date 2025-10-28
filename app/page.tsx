@@ -215,6 +215,7 @@ export default function Page() {
             <a href="/marketplace" className="text-white/70 hover:text-white transition">Marketplace</a>
             <a href="/live" className="text-white/70 hover:text-white transition">Live</a>
             <a href="/transparency" className="text-white/70 hover:text-white transition">Transparency</a>
+            <a href="/#money" className="text-white/70 hover:text-white transition">Money</a>
             <span className="text-white/70 hover:text-white transition">Security</span>
           </nav>
         </div>
@@ -242,7 +243,7 @@ export default function Page() {
       </div>
 
       {/* Where Your Money Goes */}
-      <section className="relative z-10 mt-12">
+      <section id="money" className="relative z-10 mt-12">
         <div className="mx-auto max-w-7xl px-6">
           <h2 className="text-xl font-semibold">Where Your Money Goes</h2>
           <p className="text-white/70">Unit economics, returns, timeline, and process transparency.</p>
