@@ -5,7 +5,7 @@ export default function AIAnalystChat() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<{ role: "user" | "ai"; text: string }[]>([
-    { role: "ai", text: "I’m TrendAI Analyst. Ask about ROI, soft-cap, or risks." },
+    { role: "ai", text: "I’m TrendAI Analyst. Ask about margins, soft‑cap, or risks." },
   ]);
   const mock = process.env.NEXT_PUBLIC_MOCK_MODE !== "false";
   const boxRef = useRef<HTMLDivElement | null>(null);
@@ -64,9 +64,9 @@ export default function AIAnalystChat() {
 
 function mockReply(q: string) {
   const lower = q.toLowerCase();
-  if (lower.includes("roi")) return "Projected ROI is 2.8×–3.4× over the 14‑day cycle given current velocity and CPC.";
+  if (lower.includes("roi")) return "We focus on estimated net margins (often 10–20% for sellers). Returns are not guaranteed and can be lower or zero.";
   if (lower.includes("risk")) return "Risk tier: Balanced. Autopilot caps daily spend and rebalances if ROI < forecast by 20%.";
   if (lower.includes("soft")) return "Soft‑cap is $10,000. We’re tracking pledged and investors in realtime via Supabase.";
-  return "Key drivers: creative CTR, CPC, and supplier lead times. Ask me about ROI, risks, or payouts.";
+  return "Key drivers: creative CTR, CPC, and supplier lead times. Ask me about margins, risks, or payouts.";
 }
 

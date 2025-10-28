@@ -474,12 +474,12 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ROI Forecast */}
+      {/* Launch Forecast */}
       <section className="relative z-10">
         <div className="mx-auto max-w-7xl px-6 pb-14">
           <div className="rounded-3xl glass p-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg md:text-xl font-semibold">Dynamic ROI Forecast</h2>
+              <h2 className="text-lg md:text-xl font-semibold">Upcoming Launches</h2>
               <span className="text-xs rounded-full border border-white/10 bg-white/5 px-2 py-1 text-white/70">Simulated for demo</span>
             </div>
             <div className="mt-5 overflow-x-auto">

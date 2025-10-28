@@ -26,7 +26,7 @@ export default function RecommendedRounds() {
         {list.map((r) => (
           <div key={r.id} className="rounded-xl border border-white/10 bg-white/5 p-4">
             <div className="font-medium">{r.name}</div>
-            <div className="text-sm text-white/70">Est. ROI ×{r.roi}</div>
+            <div className="text-sm text-white/70">Est. net margin 10–20%</div>
           </div>
         ))}
       </div>

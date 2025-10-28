@@ -8,8 +8,7 @@ export default function RiskGauge() {
           <div key={b} className={`h-8 rounded ${i === 1 ? "bg-neon-teal" : "bg-white/10"}`} />
         ))}
       </div>
-      <div className="mt-2 text-xs text-white/60">Indicative only; real risk varies by execution.</div>
+      <div className="mt-2 text-xs text-white/60">Legend: Low (left) → High (right). Indicative only; real risk varies by execution.</div>
     </div>
   );
 }
-

@@ -83,7 +83,7 @@ export default function TrendCarousel() {
             <p className="mt-1 text-sm text-white/70 line-clamp-2">{t.description}</p>
             <div className="mt-3 flex items-center justify-between text-xs text-white/70">
               <span>AI Confidence {Math.round(t.ai_confidence)}%</span>
-              <span>ROI ×{t.projected_roi}</span>
+              <span>Est. net margin 10–20%</span>
             </div>
             <div className="mt-4 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-center text-sm transition group-hover:bg-white/10">View Full Trend Report</div>
           </div>

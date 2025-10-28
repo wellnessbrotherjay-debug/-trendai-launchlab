@@ -81,7 +81,7 @@ export default function TrendDetailsPage() {
   const subtitle = useMemo(() => {
     if (!trend) return "";
     const conf = trend.ai_confidence ? `${Math.round(trend.ai_confidence)}% AI Confidence` : "AI Confidence pending";
-    const roi = trend.projected_roi ? ` · Projected ROI ×${trend.projected_roi}` : "";
+  const roi = "";
     return conf + roi;
   }, [trend]);
 

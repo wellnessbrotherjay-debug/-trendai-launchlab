@@ -12,6 +12,7 @@ export default function UnitEconomicsChart({ unitCost = 8, shipping = 2, fees = 
   return (
     <div className="rounded-2xl border border-white/10 p-4 bg-white/5">
       <div className="text-sm text-white/70 mb-2">Unit Economics</div>
+      <div className="mb-3 text-xs text-white/60">Legend: purple = cost bars; teal = net.</div>
       <div className="space-y-2">
         {costs.map((c) => (
           <div key={c.label} className="text-sm flex items-center gap-3">
@@ -33,4 +34,3 @@ export default function UnitEconomicsChart({ unitCost = 8, shipping = 2, fees = 
     </div>
   );
 }
-

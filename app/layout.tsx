@@ -1,6 +1,6 @@
 export const metadata = {
   title: "TrendAI LaunchLab",
-  description: "Invest in the future, 14 days at a time.",
+  description: "Back new products in 24‑hour rounds. Reward‑based pre‑orders, not financial investments.",
 };
 
 import "./globals.css";
