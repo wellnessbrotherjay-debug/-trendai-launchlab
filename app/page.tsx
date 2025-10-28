@@ -19,6 +19,7 @@ import FundingTimeline from "../components/FundingTimeline";
 import ProcessFlow from "../components/ProcessFlow";
 import ReturnCalculator from "../components/ReturnCalculator";
 import RiskGauge from "../components/RiskGauge";
+import FadiSection from "../components/FadiSection";
 
 type Round = {
   id: string;
@@ -241,6 +242,9 @@ export default function Page() {
               <div className="mt-4 text-sm text-white/60">
                 Current Round: <span className="text-white/90 font-medium">{roundName}</span>
       </div>
+
+      {/* Fadi section */}
+      <FadiSection />
 
       {/* Where Your Money Goes */}
       <section id="money" className="relative z-10 mt-12">
